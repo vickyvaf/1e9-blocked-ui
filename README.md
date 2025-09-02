@@ -1,8 +1,8 @@
 # 1e9 Lock
 
 Demo app that shows how a Web Worker runs million/billion-scale computation while the UI stays responsive.
-Left panel to show terminal log.
-Right panel to show simple “console.log” area that echoes what you type/click.
+- Left panel to show terminal log.
+- Right panel to show simple ```console.log``` area that echoes what you type/click.
 
 ## What’s inside
 
