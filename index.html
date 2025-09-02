@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Blocked UI Demo - Web Worker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: ui-sans-serif, system-ui;
+    }
+
+    body {
+      margin: 0;
+      background: #f7f7f7;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      min-height: 100vh;
+      padding: 12px;
+    }
+
+    section {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 16px;
+      background: #fff;
+    }
+
+    h2 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    input,
+    button {
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .hint {
+      color: #6b7280;
+      font-size: 12px;
+      margin: 8px 0;
+    }
+
+    /* Terminal styles */
+    .terminal {
+      background: #111827;
+      color: #d1fae5;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      border-radius: 10px;
+      padding: 10px;
+      height: calc(100vh - 190px);
+      overflow: auto;
+      line-height: 1.35;
+      border: 1px solid #1f2937;
+    }
+
+    .terminal .line {
+      white-space: pre;
+    }
+
+    .terminal .dim {
+      color: #9ca3af;
+    }
+
+    .console {
+      background: #f3f4f6;
+      color: #111827;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 10px;
+      height: calc(100vh - 150px);
+      overflow: auto;
+      line-height: 1.35;
+    }
+
+    .console .line {
+      white-space: pre;
+    }
+
+
+    @media (max-width: 900px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="grid">
+    <section>
+      <h2>Counter (0 → max)</h2>
+
+      <div class="row">
+        <label>Max:
+          <input id="max" type="text" inputmode="numeric" value="100000000" autocomplete="off" />
+        </label>
+        <label>Step:
+          <input id="step" type="text" inputmode="numeric" value="100000" autocomplete="off" />
+        </label>
+      </div>
+
+      <div class="row">
+        <button id="run-worker">Run in Web Worker</button>
+        <button id="stop-worker">Stop Worker</button>
+        <button id="run-main">Run on Main Thread (blocks)</button>
+        <button id="clear">Clear</button>
+      </div>
+
+      <div id="status" class="hint">Idle</div>
+      <div id="terminal" class="terminal" aria-live="polite"></div>
+    </section>
+
+    <section>
+      <h2>Test Interactivity</h2>
+      <div class="row">
+        <input id="text" placeholder="Type here while worker runs…" autocomplete="off" />
+        <button id="ping">Ping</button>
+      </div>
+      <div id="fps" class="hint">FPS: —</div>
+
+      <div id="console" class="console" aria-live="polite"></div>
+    </section>
+  </div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+
+</html>
